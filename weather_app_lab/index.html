@@ -34,7 +34,11 @@
         
             <label id="buttonLabel">State</label>
             <br>
-            <input type="text" name="city">
+            <select name="drop-down" id="drop-down">
+                <option value="one">Select One</option>
+                <option value="two">Two</option>
+                <option value="three">Three</option>
+            </select>
             <input type="submit" value="Search by City, State">
 
             <h5>OR</h5>
@@ -46,7 +50,23 @@
         </form>
     </section>
     <main>
-    <div></div>    
+    <div>Picture of Weather</div>
+    <div>
+        Giant CurrentTemp°F
+        <br>
+        Feels Like Temp
+        <br>
+        Min-Temp/Max Temp
+        <br>
+    </div>
+    <div>
+        Humidity
+        <br>
+        Wind speed
+        <br>
+        Clock
+    </div>
+    <div>Description of Weather</div>    
     </main>
     <footer>Given enough time this should show a limited 5 day forecast</footer>
 </body>

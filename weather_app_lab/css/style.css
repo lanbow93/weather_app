@@ -13,13 +13,19 @@ header {
     text-align: center;
 }
 
+#left {
+    text-align: center;
+}
+
 footer {
     background-color: blueviolet;
     grid-column: 1/4;
 }
 
 main {
+    display: grid;
     background-color: grey;
+    grid-template: 1fr 1fr / 1fr 1fr;
 }
 
 input[type="submit"] {

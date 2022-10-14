@@ -1,5 +1,8 @@
-// http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=3c2c378d932ce2a3619cd17e3119a611  << To get weather
-// http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit=1&appid=3c2c378d932ce2a3619cd17e3119a611 << To get Lat and Long
+// https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid=3c2c378d932ce2a3619cd17e3119a611
+// https://api.openweathermap.org/data/2.5/weather?lat=32.7762719&lon=-96.7968559&appid=3c2c378d932ce2a3619cd17e3119a611
+
+// http://api.openweathermap.org/geo/1.0/zip?zip={zip code},{country code}&appid={API key}<< To get Lat and Long
+// http://api.openweathermap.org/geo/1.0/direct?q=dallas,TX,US&limit=1&appid=3c2c378d932ce2a3619cd17e3119a611  << Test
 
 // Information I will need but comes from external sources
 let weatherData;
@@ -15,7 +18,7 @@ let longitude;
 //
 function grabLocationInformation(event) {
     const Promise = $.ajax({
-        // url: `http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid=3c2c378d932ce2a3619cd17e3119a611`
+        // url: `http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit=1&appid=3c2c378d932ce2a3619cd17e3119a611`
     })
 
     Promise.then(
