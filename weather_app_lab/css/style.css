@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;  /*viewport height*/
+    display: grid;
+    grid-template: 1fr 3fr 1fr / 1fr 4fr;
+}
+
+header {
+    background-color: steelblue;
+    grid-column-start: 1;
+    grid-column: 1/4;
+    text-align: center;
+}
+
+footer {
+    background-color: blueviolet;
+    grid-column: 1/4;
+}
+
+main {
+    background-color: grey;
+}
+
+input[type="submit"] {
+    text-align: center;
+    margin-top: 1em;
+}

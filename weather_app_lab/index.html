@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Weather App</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script
+    src="https://code.jquery.com/jquery-3.6.1.js"
+    integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"></script>
+    <script src="./js/app.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Quick Weather Lookup</h1>
+        <div id="locationHeading">
+            <h3>
+                <span id="city">City</span>,
+                <span id="state">State</span>,
+                <span id="country">Country</span>
+            </h3>
+        </div>
+
+    </header>
+    <section id="left">
+        <form>
+            <h5 id="formHeading">Please Enter The Following:</h5>
+            <label id="buttonLabel">City</label>
+            <br>
+            <input type="text" name="city">
+            <br>
+        
+            <label id="buttonLabel">State</label>
+            <br>
+            <input type="text" name="city">
+            <input type="submit" value="Search by City, State">
+
+            <h5>OR</h5>
+
+            <label id="buttonLabel">Zip Code</label>
+            <br>
+            <input type="text" name="city">
+            <input type="submit" id="zipCodeSearch" value="Search by Zip Code">
+        </form>
+    </section>
+    <main>
+    <div></div>    
+    </main>
+    <footer>Given enough time this should show a limited 5 day forecast</footer>
+</body>
+</html>
