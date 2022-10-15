@@ -20,7 +20,7 @@ $frequentLocations = {
     cityLabel: $("#city"), // text()
     stateLabel: $("#state"), // text()
     // Form section
-    cityTextBox: $("#cityTextBox"), // .text()
+    cityTextBox: $("#cityTextBox"), // .val()
     stateTextBox: $("#drop-down"), // .val()
     cityLookupButton: $("#citySubmit"), 
     zipCodeTextBox: $("#zipBox"), //.val
@@ -47,12 +47,21 @@ for (state of stateList){
 }
 
 // Click listener when city/state is submitted
-$frequentLocations.cityLookupButton.on("submit", grabLocationInformation);
+$("#cityForm").on("submit", grabLocationInformation);
 
 function grabInfoByCity() {
+    enteredCity = $frequentLocations.cityTextBox;
+    enteredState = $frequentLocations.stateTextBox;
+    cityInput = enteredCity.val();
+    stateInput = enteredState.val();
+    console.log(stateInput)
+    $frequentLocations.cityLabel.text(cityInput)
+    $frequentLocations.stateLabel.text(stateInput)
 }
 
 function grabLocationInformation(event) {
+    event.preventDefault();
+    grabInfoByCity();
     const Promise = $.ajax({
         // url: `http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit=1&appid=3c2c378d932ce2a3619cd17e3119a611`
     })
@@ -65,6 +74,7 @@ function grabLocationInformation(event) {
             console.log(`ERROR MESSAGE: ${error}`)
         }
     )
+    
 }
 
 function grabWeatherInformation() {

@@ -32,3 +32,9 @@ input[type="submit"] {
     text-align: center;
     margin-top: 1em;
 }
+
+img {
+    max-width: 100%;
+    width: 100%;
+    
+}

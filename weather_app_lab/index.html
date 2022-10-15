@@ -25,7 +25,7 @@
 
     </header>
     <section id="left">
-        <form>
+        <form id="cityForm">
             <h5 id="formHeading">Please Enter The Following:</h5>
             <label id="buttonLabel">City</label>
             <br>
@@ -37,9 +37,9 @@
             </select>
             <br>
             <input type="submit" id="citySubmit" value="Search by City, State">
-
+        </form>
             <h5>OR</h5>
-
+        <form id="zipForm">
             <label id="buttonLabel">Zip Code</label>
             <br>
             <input type="text" id="zipBox" name="city">
@@ -48,9 +48,8 @@
         </form>
     </section>
     <main>
-    <div id="top-left">
-        Picture of Weather
-        <img src="" alt="" id="weatherImage">
+    <div id="top-left"> 
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjZ6hQvwqbjtGhXGOgVAU49defdRkAIOPh9NHrQwg&s" alt="Sunny Symbol" id="weatherImage">
     </div>
     <div id="top-right">
         <h2>Current Temp <br><span id="mainTemp">92</span>°F</h2>
