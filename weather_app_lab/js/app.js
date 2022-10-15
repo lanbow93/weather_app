@@ -33,10 +33,8 @@ $frequentLocations = {
     maxTempReading: $("#maxTemp"), // .text()
     humidityReading: $("#humidity"), // .text()
     windSpeedReading: $("#windSpeed"), // .text()
-    hourDisplay: $("#hour"), // .text()
-    minuteDisplay: $("#minute"), // .text()
-    minuteDisplay: $("#second"), // .text()
-    descriptionDisplay: $("description") // .text()
+    timeDisplay: $("#time"), // .text()
+    descriptionDisplay: $("#description") // .text()
 }
 // Iterating though state list and adding in State options
 for (state of stateList){
@@ -87,17 +85,18 @@ function tempConversion(kelvinTemp){
 
 function updateDisplay(){
     let currentTemp = 
-    $frequentLocations.mainTempReading.text(
-        tempConversion(weatherData.main.temp)
-    )
+    $frequentLocations.mainTempReading.text(tempConversion(weatherData.main.temp));
+    $frequentLocations.feelTempReading.text(tempConversion(weatherData.main.feels_like));
+    $frequentLocations.minTempReading.text(tempConversion(weatherData.main.temp_min));
+    $frequentLocations.maxTempReading.text(tempConversion(weatherData.main.temp_max));
+    $frequentLocations.humidityReading.text(weatherData.main.humidity);
+    $frequentLocations.windSpeedReading.text(weatherData.wind.speed);
+    $frequentLocations.descriptionDisplay.text(weatherData.weather[0].description);
 }
 
 
 
 function grabWeatherInformation() {
-    console.log(locationInformation)
-    console.log("Lat: " + latitude)
-    console.log("Lon: " + longitude)
 
     const Promise = $.ajax({
         url: `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=3c2c378d932ce2a3619cd17e3119a611`
@@ -106,14 +105,39 @@ function grabWeatherInformation() {
   Promise.then(
     (success) => {
         weatherData = success;
-        updateDisplay()
-
+        updateDisplay();
+        currentTime();
     },
     (fail) => {
         console.log(`Alert Error: ${fail}`);
     }
   );
 }
+
+function currentTime() {
+    let date = new Date(); 
+    let hh = date.getHours();
+    let mm = date.getMinutes();
+    let ss = date.getSeconds();
+    let session = "AM";
+  
+    if(hh == 0){
+        hh = 12;
+    }
+    if(hh > 12){
+        hh = hh - 12;
+        session = "PM";
+     }
+  
+     hh = (hh < 10) ? "0" + hh : hh;
+     mm = (mm < 10) ? "0" + mm : mm;
+     ss = (ss < 10) ? "0" + ss : ss;
+      
+     let time = hh + ":" + mm + ":" + ss + " " + session;
+  
+    $frequentLocations.timeDisplay.text(time); 
+    let t = setTimeout(function(){ currentTime() }, 1000);
+  }
 
 
 

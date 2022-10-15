@@ -26,15 +26,33 @@ footer {
 main {
     display: grid;
     grid-template: 1fr 1fr / 1fr 1fr;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
 }
 
 input[type="submit"] {
     text-align: center;
     margin-top: 1em;
 }
+#top-left {
+    height: 100%;
+    width: 60%;
+    
+}
 
 img {
+    
     max-width: 100%;
     width: 100%;
+    object-fit: contain;
     
+}
+
+.centered {
+    position: fixed;
+    top: 40%;
+    left: 40%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
 }
