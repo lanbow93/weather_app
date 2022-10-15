@@ -9,34 +9,48 @@ let weatherData;
 let locationInformation;
 let cityInput;
 let stateInput;
-let latitude;
+let zipCode;
 let longitude;
+let latitude;
+const stateList = [ "AK - Alaska", "AL - Alabama", "AR - Arkansas", "AZ - Arizona", "CA - California", "CO - Colorado", "CT - Connecticut", "DC - District of Columbia","DE - Delaware", "FL - Florida", "GA - Georgia", "HI - Hawaii", "IA - Iowa", "ID - Idaho", "IL - Illinois", "IN - Indiana", "KS - Kansas", "KY - Kentucky", "LA - Louisiana", "MA - Massachusetts", "MD - Maryland", "ME - Maine", "MI - Michigan", "MN - Minnesota", "MO - Missouri", "MS - Mississippi", "MT - Montana", "NC - North Carolina", "ND - North Dakota", "NE - Nebraska", "NH - New Hampshire", "NJ - New Jersey", "NM - New Mexico", "NV - Nevada", "NY - New York", "OH - Ohio", "OK - Oklahoma", "OR - Oregon", "PA - Pennsylvania", "RI - Rhode Island", "SC - South Carolina", "SD - South Dakota", "TN - Tennessee", "TX - Texas", "UT - Utah", "VA - Virginia", "VI - Virgin Islands", "VT - Vermont", "WA - Washington", "WI - Wisconsin", "WV - West Virginia", "WY - Wyoming"]
 
 // Locations I will frequently access
 $frequentLocations = {
     // Top heading section
-    cityLabel: $("#city"),
-    stateLabel: $("$state"),
+    cityLabel: $("#city"), // text()
+    stateLabel: $("#state"), // text()
     // Form section
-    cityTextBox: $("#cityTextBox"),
-    stateTextBox: $("#drop-down"),
-    cityLookupButton: $("#citySubmit"),
-    zipCodeTextBox: $("#zipBox"),
-    zipCodeLookupBotton: $("#zipCodeSearch"),
+    cityTextBox: $("#cityTextBox"), // .text()
+    stateTextBox: $("#drop-down"), // .val()
+    cityLookupButton: $("#citySubmit"), 
+    zipCodeTextBox: $("#zipBox"), //.val
+    zipCodeLookupButton: $("#zipCodeSearch"),
     // Main display area
-    weatherImage: $("#weatherImage"),
-    mainTempReading: $("#mainTemp"),
-    feelTempReading: $("#feelTemp"),
-    minTempReading: $("#minTemp"),
-    maxTempReading: $("#maxTemp"),
-    humidityReading: $("#humidity"),
-    windSpeedReading: $("#windSpeed"),
-    hourDisplay: $("#hour"),
-    minuteDisplay: $("#minute"),
-    minuteDisplay: $("second"),
-    descriptionDisplay: $("description")
+    weatherImage: $("#weatherImage"), // src alt
+    mainTempReading: $("#mainTemp"), // .text()
+    feelTempReading: $("#feelTemp"), // .text()
+    minTempReading: $("#minTemp"), // .text()
+    maxTempReading: $("#maxTemp"), // .text()
+    humidityReading: $("#humidity"), // .text()
+    windSpeedReading: $("#windSpeed"), // .text()
+    hourDisplay: $("#hour"), // .text()
+    minuteDisplay: $("#minute"), // .text()
+    minuteDisplay: $("second"), // .text()
+    descriptionDisplay: $("description") // .text()
+}
+// Iterating though state list and adding in State options
+for (state of stateList){
+    const newOption = document.createElement("option");
+    newOption.value = `${state.split('').slice(0,2).join('')}`; 
+    newOption.text = state.split('').slice(5).join('');
+    $frequentLocations.stateTextBox.append(newOption)
 }
 
+// Click listener when city/state is submitted
+$frequentLocations.cityLookupButton.on("submit", grabLocationInformation);
+
+function grabInfoByCity() {
+}
 
 function grabLocationInformation(event) {
     const Promise = $.ajax({
