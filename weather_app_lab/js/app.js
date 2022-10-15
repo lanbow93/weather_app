@@ -1,5 +1,5 @@
 // https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid=3c2c378d932ce2a3619cd17e3119a611
-// https://api.openweathermap.org/data/2.5/weather?lat=32.7762719&lon=-96.7968559&appid=3c2c378d932ce2a3619cd17e3119a611
+// https://api.openweathermap.org/data/2.5/weather?lat=32.7762719&lon=-96.7968559&appid=3c2c378d932ce2a3619cd17e3119a611 <<Test
 
 // http://api.openweathermap.org/geo/1.0/zip?zip={zip code},{country code}&appid={API key}<< To get Lat and Long
 // http://api.openweathermap.org/geo/1.0/direct?q=Dallas,TX,US&limit=1&appid=3c2c378d932ce2a3619cd17e3119a611  << Test
@@ -57,7 +57,7 @@ function grabInfoByCity() {
     $frequentLocations.stateLabel.text(stateInput)
 }
 
-
+// Taking user input and getting lon and lat for weather API
 function grabLocationInformation(event) {
     event.preventDefault();
     grabInfoByCity();
@@ -79,6 +79,19 @@ function grabLocationInformation(event) {
     
 }
 
+function tempConversion(kelvinTemp){
+    let celsius = kelvinTemp - 273;
+    let exactFarenheit = (celsius * (9/5) + 32)
+    return Math.floor(exactFarenheit*10) / 10;
+}
+
+function updateDisplay(){
+    let currentTemp = 
+    $frequentLocations.mainTempReading.text(
+        tempConversion(weatherData.main.temp)
+    )
+}
+
 
 
 function grabWeatherInformation() {
@@ -86,18 +99,21 @@ function grabWeatherInformation() {
     console.log("Lat: " + latitude)
     console.log("Lon: " + longitude)
 
-  const Promise = $.ajax({
-    // https://api.openweathermap.org/data/2.5/weather?lat=32.7762719&lon=-96.7968559&appid=3c2c378d932ce2a3619cd17e3119a611,
-  });
+    const Promise = $.ajax({
+        url: `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=3c2c378d932ce2a3619cd17e3119a611`
+    });
 
   Promise.then(
     (success) => {
-        // console.log(success)
+        weatherData = success;
+        updateDisplay()
+
     },
     (fail) => {
         console.log(`Alert Error: ${fail}`);
     }
   );
-
 }
+
+
 
