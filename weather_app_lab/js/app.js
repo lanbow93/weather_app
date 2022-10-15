@@ -13,9 +13,31 @@ let latitude;
 let longitude;
 
 // Locations I will frequently access
- 
+$frequentLocations = {
+    // Top heading section
+    cityLabel: $("#city"),
+    stateLabel: $("$state"),
+    // Form section
+    cityTextBox: $("#cityTextBox"),
+    stateTextBox: $("#drop-down"),
+    cityLookupButton: $("#citySubmit"),
+    zipCodeTextBox: $("#zipBox"),
+    zipCodeLookupBotton: $("#zipCodeSearch"),
+    // Main display area
+    weatherImage: $("#weatherImage"),
+    mainTempReading: $("#mainTemp"),
+    feelTempReading: $("#feelTemp"),
+    minTempReading: $("#minTemp"),
+    maxTempReading: $("#maxTemp"),
+    humidityReading: $("#humidity"),
+    windSpeedReading: $("#windSpeed"),
+    hourDisplay: $("#hour"),
+    minuteDisplay: $("#minute"),
+    minuteDisplay: $("second"),
+    descriptionDisplay: $("description")
+}
 
-//
+
 function grabLocationInformation(event) {
     const Promise = $.ajax({
         // url: `http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit=1&appid=3c2c378d932ce2a3619cd17e3119a611`
@@ -49,4 +71,3 @@ function grabWeatherInformation() {
 
 }
 
-grabInformation();

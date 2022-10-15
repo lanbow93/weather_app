@@ -19,7 +19,7 @@
             <h3>
                 <span id="city">City</span>,
                 <span id="state">State</span>,
-                <span id="country">Country</span>
+                <span id="country">United States</span>
             </h3>
         </div>
 
@@ -29,9 +29,8 @@
             <h5 id="formHeading">Please Enter The Following:</h5>
             <label id="buttonLabel">City</label>
             <br>
-            <input type="text" name="city">
+            <input type="text" id="cityTextBox">
             <br>
-        
             <label id="buttonLabel">State</label>
             <br>
             <select name="drop-down" id="drop-down">
@@ -39,34 +38,46 @@
                 <option value="two">Two</option>
                 <option value="three">Three</option>
             </select>
-            <input type="submit" value="Search by City, State">
+            <br>
+            <input type="submit" id="citySubmit" value="Search by City, State">
 
             <h5>OR</h5>
 
             <label id="buttonLabel">Zip Code</label>
             <br>
-            <input type="text" name="city">
+            <input type="text" id="zipBox" name="city">
+            <br>
             <input type="submit" id="zipCodeSearch" value="Search by Zip Code">
         </form>
     </section>
     <main>
-    <div>Picture of Weather</div>
-    <div>
-        Giant CurrentTemp°F
+    <div id="top-left">
+        Picture of Weather
+        <img src="" alt="" id="weatherImage">
+    </div>
+    <div id="top-right">
+        <h2>Current Temp <br><span id="mainTemp">92</span>°F</h2>
         <br>
-        Feels Like Temp
+        <h4>Feels Like: <span id="feelTemp">45</span>°F</h4>
         <br>
-        Min-Temp/Max Temp
+        <h5>Min-Temp: <span id="minTemp">87</span>°F
+           | Max-Temp: <span id="maxTemp">94</span>°F</h5>
         <br>
     </div>
-    <div>
-        Humidity
+    <div id="bottom-left">
+        <p>Humidity: <span id="humidity">36</span>%</p> 
         <br>
-        Wind speed
+        <p>Wind Speed: <span id="windSpeed">10</span> mph</p>
         <br>
-        Clock
+        <p>Clock: 
+            <span id="hour">00</span>:
+            <span id="minute">00</span>:
+            <span id="second">00</span>
+        </p>
     </div>
-    <div>Description of Weather</div>    
+    <div id="bottom-right">
+        <p id="description">Description of Weather</p>
+    </div>    
     </main>
     <footer>Given enough time this should show a limited 5 day forecast</footer>
 </body>
