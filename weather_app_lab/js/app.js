@@ -2,7 +2,7 @@
 // https://api.openweathermap.org/data/2.5/weather?lat=32.7762719&lon=-96.7968559&appid=3c2c378d932ce2a3619cd17e3119a611
 
 // http://api.openweathermap.org/geo/1.0/zip?zip={zip code},{country code}&appid={API key}<< To get Lat and Long
-// http://api.openweathermap.org/geo/1.0/direct?q=dallas,TX,US&limit=1&appid=3c2c378d932ce2a3619cd17e3119a611  << Test
+// http://api.openweathermap.org/geo/1.0/direct?q=Dallas,TX,US&limit=1&appid=3c2c378d932ce2a3619cd17e3119a611  << Test
 
 // Information I will need but comes from external sources
 let weatherData;
@@ -35,7 +35,7 @@ $frequentLocations = {
     windSpeedReading: $("#windSpeed"), // .text()
     hourDisplay: $("#hour"), // .text()
     minuteDisplay: $("#minute"), // .text()
-    minuteDisplay: $("second"), // .text()
+    minuteDisplay: $("#second"), // .text()
     descriptionDisplay: $("description") // .text()
 }
 // Iterating though state list and adding in State options
@@ -48,27 +48,29 @@ for (state of stateList){
 
 // Click listener when city/state is submitted
 $("#cityForm").on("submit", grabLocationInformation);
-
 function grabInfoByCity() {
     enteredCity = $frequentLocations.cityTextBox;
     enteredState = $frequentLocations.stateTextBox;
-    cityInput = enteredCity.val();
-    stateInput = enteredState.val();
-    console.log(stateInput)
+    cityInput = enteredCity.val(); // Setting variable to submitted city
+    stateInput = enteredState.val(); // Setting variable to entered state
     $frequentLocations.cityLabel.text(cityInput)
     $frequentLocations.stateLabel.text(stateInput)
 }
+
 
 function grabLocationInformation(event) {
     event.preventDefault();
     grabInfoByCity();
     const Promise = $.ajax({
-        // url: `http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit=1&appid=3c2c378d932ce2a3619cd17e3119a611`
+        url: `http://api.openweathermap.org/geo/1.0/direct?q=${cityInput},${stateInput},US&limit=1&appid=3c2c378d932ce2a3619cd17e3119a611`
     })
 
     Promise.then(
         (data) => {
+            longitude = data[0].lon;
+            latitude = data[0].lat;
             locationInformation = data;
+            grabWeatherInformation()
         },
         (error) => {
             console.log(`ERROR MESSAGE: ${error}`)
@@ -77,19 +79,23 @@ function grabLocationInformation(event) {
     
 }
 
-function grabWeatherInformation() {
 
-    
+
+function grabWeatherInformation() {
+    console.log(locationInformation)
+    console.log("Lat: " + latitude)
+    console.log("Lon: " + longitude)
+
   const Promise = $.ajax({
-    // url: `http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=3c2c378d932ce2a3619cd17e3119a611`,
+    // https://api.openweathermap.org/data/2.5/weather?lat=32.7762719&lon=-96.7968559&appid=3c2c378d932ce2a3619cd17e3119a611,
   });
 
   Promise.then(
-    (data) => {
-        console.log(data)
+    (success) => {
+        // console.log(success)
     },
-    (error) => {
-        console.log(`Alert Error: ${error}`);
+    (fail) => {
+        console.log(`Alert Error: ${fail}`);
     }
   );
 
