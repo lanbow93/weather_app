@@ -53,30 +53,70 @@ function grabInfoByCity() {
     stateInput = enteredState.val(); // Setting variable to entered state
 }
 
+// Click listener when zip Code is submitted
+$("#zipForm").on("submit", grabLocationInformation);
+function grabInfoByZip() {
+    enteredZipCode = $frequentLocations.zipCodeTextBox;
+    zipCode = enteredZipCode.val();
+    console.log(zipCode)
+
+}
+
 // Taking user input and getting lon and lat for weather API
 function grabLocationInformation(event) {
     event.preventDefault();
+    let Promise;
+    let eventId = event.target[0].id;
     grabInfoByCity();
-    const Promise = $.ajax({
-        url: `http://api.openweathermap.org/geo/1.0/direct?q=${cityInput},${stateInput},US&limit=1&appid=3c2c378d932ce2a3619cd17e3119a611`
-    })
+    grabInfoByZip();
 
-    Promise.then(
-        (data) => {
-            if(!data.length){
-                alert("THIS CITY DOESN'T EXIST. PLEASE TRY AGAIN!")
+    if(eventId === "cityTextBox") {
+
+        Promise = $.ajax({
+            url: `http://api.openweathermap.org/geo/1.0/direct?q=${cityInput},${stateInput},US&limit=1&appid=3c2c378d932ce2a3619cd17e3119a611`
+        })
+
+        Promise.then(
+            (data) => {
+                if(!data.length){
+                    alert("THIS CITY DOESN'T EXIST. PLEASE TRY AGAIN!")
+                }
+
+                longitude = data[0].lon;
+                latitude = data[0].lat;
+                locationInformation = data;
+                grabWeatherInformation();
+                
+            },
+            (error) => {
+                console.log(`ERROR MESSAGE: ${error}`);
             }
-            longitude = data[0].lon;
-            latitude = data[0].lat;
-            locationInformation = data;
-            grabWeatherInformation();
-            
-        },
-        (error) => {
-            console.log(`ERROR MESSAGE: ${error}`);
-            console.log("This is going to be the alert message");
-        }
-    )
+        )
+
+    } else {
+        Promise = $.ajax({
+            url: `http://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},US&appid=3c2c378d932ce2a3619cd17e3119a611`
+        })
+
+        Promise.then(
+            (data) => {
+                
+                longitude = data.lon;
+                latitude = data.lat;
+                locationInformation = data;
+                grabWeatherInformation();
+                console.log(locationInformation.state);
+                
+            },
+            (error) => {
+                console.log(`ERROR MESSAGE: ${error}`);
+            }
+        )
+
+
+    }
+
+    
     
 }
 
