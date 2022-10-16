@@ -4,6 +4,7 @@ body {
     height: 100vh;  /*viewport height*/
     display: grid;
     grid-template: 1fr 3fr 1fr / 1fr 4fr;
+    font-family: Arial;
 }
 
 header {
@@ -59,9 +60,12 @@ margin */
     border-right-style: dashed;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    
+    justify-content: space-around; 
 }
+#mainTemp {
+    font-size: 3em;
+}
+
 #bottom-left {
     border-left-style: dashed;
     border-bottom-style: dashed;
