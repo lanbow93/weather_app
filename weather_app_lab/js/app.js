@@ -134,6 +134,7 @@ function tempConversion(kelvinTemp){
     return Math.floor(exactFarenheit*10) / 10;
 }
 
+//Converting zip code into state
 function zipConversion() {
     
     if (zipCode >= 35000 && zipCode <= 36999) {
@@ -248,7 +249,7 @@ function zipConversion() {
 }
 
 // Icon url: http://openweathermap.org/img/wn/10d@2x.png
-
+// Update screen with the right stats
 function updateDisplay(){
     $frequentLocations.mainTempReading.text(tempConversion(weatherData.main.temp));
     $frequentLocations.feelTempReading.text(tempConversion(weatherData.main.feels_like));
@@ -264,7 +265,7 @@ function updateDisplay(){
 }
 
 
-
+// Reaching weather api and updating the display and starting clock function
 function grabWeatherInformation() {
 
     const Promise = $.ajax({
@@ -274,6 +275,7 @@ function grabWeatherInformation() {
   Promise.then(
     (success) => {
         weatherData = success;
+        fiveDayForecast();
         updateDisplay();
         currentTime();
     },
@@ -285,6 +287,8 @@ function grabWeatherInformation() {
 }
 // `https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=3c2c378d932ce2a3619cd17e3119a611`
 // `https://api.openweathermap.org/data/2.5/forecast?lat=32.7762719&lon=-96.7968559&appid=3c2c378d932ce2a3619cd17e3119a611`
+
+// Api to get the five day forecast
 function fiveDayForecast(){
 
     const Promise = $.ajax({
@@ -294,6 +298,9 @@ function fiveDayForecast(){
     Promise.then(
         (data) => {
             forecastData = data; 
+            for (let element of data.list){
+                console.log(element)
+            }
         },
         (error) => {
             console.log(`Alert Error: ${fail}`);
