@@ -24,6 +24,9 @@ header {
 footer {
     background-color: blueviolet;
     grid-column: 1/4;
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
 }
 
 main {
@@ -47,9 +50,6 @@ input[type="submit"] {
 
     
 }
-/* border-style:solid;
-border-width: .25em;
-margin */
 
 #top-left {
     border-style: dashed;
@@ -71,7 +71,7 @@ margin */
     border-bottom-style: dashed;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     
     
 }
@@ -83,7 +83,7 @@ margin */
     border-left-style: dashed;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     
 } 
 
@@ -97,10 +97,3 @@ img {
     
 }
 
-.centered {
-    position: fixed;
-    top: 40%;
-    left: 40%;
-    /* bring your own prefixes */
-    transform: translate(-50%, -50%);
-}
