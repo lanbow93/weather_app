@@ -63,13 +63,18 @@ function grabLocationInformation(event) {
 
     Promise.then(
         (data) => {
+            if(!data.length){
+                alert("THIS CITY DOESN'T EXIST. PLEASE TRY AGAIN!")
+            }
             longitude = data[0].lon;
             latitude = data[0].lat;
             locationInformation = data;
-            grabWeatherInformation()
+            grabWeatherInformation();
+            
         },
         (error) => {
-            console.log(`ERROR MESSAGE: ${error}`)
+            console.log(`ERROR MESSAGE: ${error}`);
+            console.log("This is going to be the alert message");
         }
     )
     
@@ -113,6 +118,7 @@ function grabWeatherInformation() {
     },
     (fail) => {
         console.log(`Alert Error: ${fail}`);
+        
     }
   );
 }
@@ -141,7 +147,5 @@ function currentTime() {
     $frequentLocations.timeDisplay.text(time); 
     let t = setTimeout(function(){ currentTime() }, 1000);
   }
-
-  console.log(locationInformation)
 
 

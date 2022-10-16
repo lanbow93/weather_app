@@ -57,6 +57,9 @@ margin */
 #top-right {
     border-top-style: dashed;
     border-right-style: dashed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     
 }
 #bottom-left {
