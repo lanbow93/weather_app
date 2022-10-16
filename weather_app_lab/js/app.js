@@ -26,7 +26,7 @@ $frequentLocations = {
     zipCodeTextBox: $("#zipBox"), //.val
     zipCodeLookupButton: $("#zipCodeSearch"),
     // Main display area
-    weatherImage: $("#weatherImage"), // src alt
+    weatherImage: $("img"), // src alt
     mainTempReading: $("#mainTemp"), // .text()
     feelTempReading: $("#feelTemp"), // .text()
     minTempReading: $("#minTemp"), // .text()
@@ -51,8 +51,6 @@ function grabInfoByCity() {
     enteredState = $frequentLocations.stateTextBox;
     cityInput = enteredCity.val(); // Setting variable to submitted city
     stateInput = enteredState.val(); // Setting variable to entered state
-    $frequentLocations.cityLabel.text(cityInput)
-    $frequentLocations.stateLabel.text(stateInput)
 }
 
 // Taking user input and getting lon and lat for weather API
@@ -83,15 +81,20 @@ function tempConversion(kelvinTemp){
     return Math.floor(exactFarenheit*10) / 10;
 }
 
+// Icon url: http://openweathermap.org/img/wn/10d@2x.png
+
 function updateDisplay(){
-    let currentTemp = 
     $frequentLocations.mainTempReading.text(tempConversion(weatherData.main.temp));
     $frequentLocations.feelTempReading.text(tempConversion(weatherData.main.feels_like));
     $frequentLocations.minTempReading.text(tempConversion(weatherData.main.temp_min));
     $frequentLocations.maxTempReading.text(tempConversion(weatherData.main.temp_max));
     $frequentLocations.humidityReading.text(weatherData.main.humidity);
-    $frequentLocations.windSpeedReading.text(weatherData.wind.speed);
-    $frequentLocations.descriptionDisplay.text(weatherData.weather[0].description);
+    $frequentLocations.windSpeedReading.text((Math.floor(((weatherData.wind.speed * 2.23694)*10)))/10);
+    $frequentLocations.descriptionDisplay.text(weatherData.weather[0].description.toUpperCase());
+    $frequentLocations.cityLabel.text(cityInput);
+    $frequentLocations.stateLabel.text(stateInput);
+    $frequentLocations.weatherImage.attr("src",`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`);
+
 }
 
 
@@ -139,5 +142,6 @@ function currentTime() {
     let t = setTimeout(function(){ currentTime() }, 1000);
   }
 
+  console.log(locationInformation)
 
 
