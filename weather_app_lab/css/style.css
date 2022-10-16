@@ -9,7 +9,6 @@ body {
 
 header {
     display: grid;
-    background-color: steelblue;
     grid-column-start: 1;
     grid-column: 1/4;
     text-align: center;
@@ -18,11 +17,9 @@ header {
 
 #left {
     text-align: center;
-    background-color: green;
 }
 
 footer {
-    background-color: blueviolet;
     grid-column: 1/4;
     display: flex;
     justify-content: space-evenly;
@@ -52,12 +49,10 @@ input[type="submit"] {
 }
 
 #top-left {
-    border-style: dashed;
+    background-color: grey;
     
 }
 #top-right {
-    border-top-style: dashed;
-    border-right-style: dashed;
     display: flex;
     flex-direction: column;
     justify-content: space-around; 
@@ -67,8 +62,6 @@ input[type="submit"] {
 }
 
 #bottom-left {
-    border-left-style: dashed;
-    border-bottom-style: dashed;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -76,11 +69,6 @@ input[type="submit"] {
     
 }
 #bottom-right {
-    
-    border-top-style: dashed;
-    border-right-style: dashed;
-    border-bottom-style: dashed;
-    border-left-style: dashed;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -89,11 +77,8 @@ input[type="submit"] {
 
 
 img {
-    
     max-width: 70%;
     width: 70%;
     object-fit: contain;
-
-    
 }
 

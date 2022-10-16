@@ -34,7 +34,18 @@ $frequentLocations = {
     humidityReading: $("#humidity"), // .text()
     windSpeedReading: $("#windSpeed"), // .text()
     timeDisplay: $("#time"), // .text()
-    descriptionDisplay: $("#description") // .text()
+    descriptionDisplay: $("#description"), // .text()
+    // Footer display area
+    dayOneMax: $("#dayOneMax"),
+    dayOneMin: $("#dayOneMin"),
+    dayTwoMax: $("#dayTwoMax"),
+    dayTwoMin: $("#dayTwoMin"),
+    dayThreeMax: $("#dayThreeMax"),
+    dayThreeMin: $("#dayThreeMin"),
+    dayFourMax: $("#dayFourMax"),
+    dayFourMin: $("#dayFourMin"),
+    dayFiveMax: $("#dayFiveMax"),
+    dayFiveMin: $("#dayFiveMin"),
 }
 // Iterating though state list and adding in State options
 for (state of stateList){
