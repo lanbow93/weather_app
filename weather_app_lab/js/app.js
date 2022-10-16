@@ -6,6 +6,7 @@
 
 // Information I will need but comes from external sources
 let weatherData;
+let forecastData;
 let locationInformation;
 let cityInput;
 let state;
@@ -281,6 +282,24 @@ function grabWeatherInformation() {
         
     }
   );
+}
+// `https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=3c2c378d932ce2a3619cd17e3119a611`
+// `https://api.openweathermap.org/data/2.5/forecast?lat=32.7762719&lon=-96.7968559&appid=3c2c378d932ce2a3619cd17e3119a611`
+function fiveDayForecast(){
+
+    const Promise = $.ajax({
+        url: `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=3c2c378d932ce2a3619cd17e3119a611`
+    })
+
+    Promise.then(
+        (data) => {
+            forecastData = data; 
+        },
+        (error) => {
+            console.log(`Alert Error: ${fail}`);
+        }
+    )
+    
 }
 
 function currentTime() {
