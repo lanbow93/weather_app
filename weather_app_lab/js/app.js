@@ -70,6 +70,7 @@ function grabLocationInformation(event) {
     grabInfoByCity();
     grabInfoByZip();
 
+    // If user submitted 
     if(eventId === "cityTextBox") {
 
         Promise = $.ajax({
