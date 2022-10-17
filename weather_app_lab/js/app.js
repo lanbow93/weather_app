@@ -285,7 +285,7 @@ function grabWeatherInformation() {
     }
   );
 }
-// `https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=3c2c378d932ce2a3619cd17e3119a611`
+// `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=3c2c378d932ce2a3619cd17e3119a611`
 // `https://api.openweathermap.org/data/2.5/forecast?lat=32.7762719&lon=-96.7968559&appid=3c2c378d932ce2a3619cd17e3119a611`
 
 // Api to get the five day forecast
@@ -334,4 +334,10 @@ function currentTime() {
     let t = setTimeout(function(){ currentTime() }, 1000);
   }
 
+
+// Breaking down returned object into 5 min/max combos
+function parsingWeather(){
+    // Taking the UNIX timestamp and converting it to weekday number
+    new Date(data.list[i].dt * 1000).getDay() // https://stackoverflow.com/questions/49608768/convert-unix-timestamp-to-week-day (understanding this code)
+}
 
