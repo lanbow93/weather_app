@@ -263,7 +263,7 @@ function updateDisplay(){
     $frequentLocations.cityLabel.text(weatherData.name);
     $frequentLocations.stateLabel.text(state);
     $frequentLocations.weatherImage.attr("src",`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`);
-
+    
 }
 
 
@@ -309,7 +309,12 @@ function fiveDayForecast(){
     )
 }
 
+// Extracts 5 day forcast and puts Highs and Lows on screen
 function breakDownForecast() {
+
+    // dayOneMax: $("#dayOneMax")
+    // dayOneMin: $("#dayOneMin")
+
     // let dayOneArray; We have this info on the board already
     let dayTwoArray = [];
     let dayThreeArray = [];
@@ -319,7 +324,7 @@ function breakDownForecast() {
     counter = 32;
 
 
-    //for 
+    // Loops through list and pushes temps for each day to separate array
     for (let element of forecastData.list){
         if (counter > 24) {
             dayTwoArray.push(element.main.temp);
@@ -336,11 +341,18 @@ function breakDownForecast() {
             counter--; 
         }
     }
-    console.log(dayTwoArray);
-    // console.log(Math.max(...dayTwoArray));
-    console.log(dayThreeArray)
-    console.log(dayFourArray)
-    console.log(dayFiveArray)
+
+    // Update 5 day forecast display
+    $frequentLocations.dayOneMax.text(tempConversion(weatherData.main.temp_min))
+    $frequentLocations.dayOneMin.text(tempConversion(weatherData.main.temp_max))
+    $frequentLocations.dayTwoMax.text(tempConversion(Math.max(...dayTwoArray)))
+    $frequentLocations.dayTwoMin.text(tempConversion(Math.min(...dayTwoArray)))
+    $frequentLocations.dayThreeMax.text(tempConversion(Math.max(...dayThreeArray)))
+    $frequentLocations.dayThreeMin.text(tempConversion(Math.min(...dayThreeArray)))
+    $frequentLocations.dayFourMax.text(tempConversion(Math.max(...dayFourArray)))
+    $frequentLocations.dayFourMin.text(tempConversion(Math.min(...dayFourArray)))
+    $frequentLocations.dayFiveMax.text(tempConversion(Math.max(...dayFiveArray)))
+    $frequentLocations.dayFiveMin.text(tempConversion(Math.min(...dayFiveArray)))
 }
 
 // function for adding in clock and date
