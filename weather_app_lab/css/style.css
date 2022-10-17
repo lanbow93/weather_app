@@ -42,7 +42,7 @@ footer {
 
 main {
     display: grid;
-    grid-template: 1fr 1fr / 1fr 1fr;
+    grid-template: 1fr 1fr / 1fr;
     justify-content: center;
     align-content: center;
     text-align: center;
@@ -106,5 +106,17 @@ img {
     object-fit: contain;
 }
 
-
-
+@media (max-width:420px) {
+    body {
+        grid-template: 2fr 1fr 1fr 1fr / 1fr 1fr ;
+    }
+    main {
+        grid-template: 1fr/1fr
+    }
+    footer {
+        display: none;
+    }
+    #top-right h5 {
+        display: none;
+    }
+}
