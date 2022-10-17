@@ -4,7 +4,7 @@ Simple overview of use/purpose.
 
 ## Description
 
-An online weather application created to provide a quick and detailed readout of weather conditions for a given area. An individual should be able to enter in their City & State or Zip Code and be able to get the weather for their their area. All temps currently only in Farenheit and US Locations
+An online weather application created to provide a quick and detailed readout of weather conditions for a given area. An individual should be able to enter in their City & State or Zip Code and be able to get the weather for the entered area. All temps are currently only in Farenheit and US Locations
 
 ## Information To Know
 
