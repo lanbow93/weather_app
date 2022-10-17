@@ -40,14 +40,19 @@ $frequentLocations = {
     dateDisplay: $("#date"),
     descriptionDisplay: $("#description"), // .text()
     // Footer display area
+    dayOneLabel: $("#firstDay"),
     dayOneMax: $("#dayOneMax"),
     dayOneMin: $("#dayOneMin"),
+    dayTwoLabel: $("#secondDay"),
     dayTwoMax: $("#dayTwoMax"),
     dayTwoMin: $("#dayTwoMin"),
+    dayThreeLabel: $("#thirdDay"),
     dayThreeMax: $("#dayThreeMax"),
     dayThreeMin: $("#dayThreeMin"),
+    dayFourLabel: $("#fourthDay"),
     dayFourMax: $("#dayFourMax"),
     dayFourMin: $("#dayFourMin"),
+    dayFiveLabel: $("#fifthDay"),
     dayFiveMax: $("#dayFiveMax"),
     dayFiveMin: $("#dayFiveMin"),
 }
@@ -136,6 +141,33 @@ function tempConversion(kelvinTemp){
     return Math.floor(exactFarenheit*10) / 10;
 }
 
+function switchNumberWithDay(number) {
+    let day;
+    switch (new Date(number * 1000).getDay() ) {
+        case 0:
+            day = "Sunday";
+            break;
+        case 1:
+            day = "Monday";
+            break;
+        case 2:
+            day = "Tuesday";
+            break;
+        case 3:
+            day = "Wednesday";
+            break;
+        case 4:
+            day = "Thursday";
+            break;
+        case 5:
+            day = "Friday";
+            break;
+        case 6:
+            day = "Saturday";
+            break;
+    }
+    return day
+}
 //Converting zip code into state
 function zipConversion() {
     
@@ -311,48 +343,66 @@ function fiveDayForecast(){
 
 // Extracts 5 day forcast and puts Highs and Lows on screen
 function breakDownForecast() {
-
-    // dayOneMax: $("#dayOneMax")
-    // dayOneMin: $("#dayOneMin")
-
     // let dayOneArray; We have this info on the board already
-    let dayTwoArray = [];
-    let dayThreeArray = [];
-    let dayFourArray = [];
-    let dayFiveArray = [];
+    let dayTwo = {
+        day: 7,
+        array: []
+    };
+    let dayThree = {
+        day: 7,
+        array: []
+    };
+    let dayFour = {
+        day: 7,
+        array: []
+    };
+    let dayFive = {
+        day: 7,
+        array: []
+    }
     // parsingTime() converts timestamp to weekday nummber 0 - 6 (Sun - Sat)
     counter = 32;
-
-
+    let todayDate = new Date().toLocaleDateString();
     // Loops through list and pushes temps for each day to separate array
     for (let element of forecastData.list){
-        if (counter > 24) {
-            dayTwoArray.push(element.main.temp);
-            counter--;
-        } else if (counter > 16) {
-            dayThreeArray.push(element.main.temp);
-            counter--;
-        } else if (counter > 8) {
-            dayFourArray.push(element.main.temp);
-            counter--; 
-        }
-        else if (counter > 0) {
-            dayFiveArray.push(element.main.temp);
-            counter--; 
+        if(todayDate !== parsingTime(element.dt)) {
+            if (counter > 24) {
+                dayTwo.day = switchNumberWithDay(element.dt)
+                dayTwo.array.push(element.main.temp);
+                counter--;
+            } else if (counter > 16) {
+                dayThree.day = switchNumberWithDay(element.dt)
+                dayThree.array.push(element.main.temp);
+                counter--;
+            } else if (counter > 8) {
+                dayFour.day = switchNumberWithDay(element.dt)
+                dayFour.array.push(element.main.temp);
+                counter--; 
+            } else if (counter > 0) {
+                dayFive.day = switchNumberWithDay(element.dt)
+                dayFive.array.push(element.main.temp);
+                counter--; 
+                console.log(dayFive.day)
+            }
         }
     }
 
     // Update 5 day forecast display
+    $frequentLocations.dayOneLabel.text("Today")
     $frequentLocations.dayOneMax.text(tempConversion(weatherData.main.temp_min))
     $frequentLocations.dayOneMin.text(tempConversion(weatherData.main.temp_max))
-    $frequentLocations.dayTwoMax.text(tempConversion(Math.max(...dayTwoArray)))
-    $frequentLocations.dayTwoMin.text(tempConversion(Math.min(...dayTwoArray)))
-    $frequentLocations.dayThreeMax.text(tempConversion(Math.max(...dayThreeArray)))
-    $frequentLocations.dayThreeMin.text(tempConversion(Math.min(...dayThreeArray)))
-    $frequentLocations.dayFourMax.text(tempConversion(Math.max(...dayFourArray)))
-    $frequentLocations.dayFourMin.text(tempConversion(Math.min(...dayFourArray)))
-    $frequentLocations.dayFiveMax.text(tempConversion(Math.max(...dayFiveArray)))
-    $frequentLocations.dayFiveMin.text(tempConversion(Math.min(...dayFiveArray)))
+    $frequentLocations.dayTwoLabel.text("Tomorrow")
+    $frequentLocations.dayTwoMax.text(tempConversion(Math.max(...dayTwo.array)))
+    $frequentLocations.dayTwoMin.text(tempConversion(Math.min(...dayTwo.array)))
+    $frequentLocations.dayThreeLabel.text(dayThree.day)
+    $frequentLocations.dayThreeMax.text(tempConversion(Math.max(...dayThree.array)))
+    $frequentLocations.dayThreeMin.text(tempConversion(Math.min(...dayThree.array)))
+    $frequentLocations.dayFourLabel.text(dayFour.day)
+    $frequentLocations.dayFourMax.text(tempConversion(Math.max(...dayFour.array)))
+    $frequentLocations.dayFourMin.text(tempConversion(Math.min(...dayFour.array)))
+    $frequentLocations.dayFiveLabel.text(dayFive.day)
+    $frequentLocations.dayFiveMax.text(tempConversion(Math.max(...dayFive.array)))
+    $frequentLocations.dayFiveMin.text(tempConversion(Math.min(...dayFive.array)))
 }
 
 // function for adding in clock and date
@@ -387,7 +437,6 @@ function currentTime() {
 function parsingTime(timeStamp){
     // Taking the UNIX timestamp and converting it to weekday number
     // let convertDay = new Date(timeStamp * 1000).getDay() 
-    let test = new Date(timeStamp * 1000).toLocaleDateString() // Output >  xx/xx/xxxx
-    return test;
+    return new Date(timeStamp * 1000).toLocaleDateString() // Output >  xx/xx/xxxx
 }
 
