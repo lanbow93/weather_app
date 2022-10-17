@@ -14,6 +14,7 @@ let state;
 let zipCode;
 let longitude;
 let latitude;
+
 const stateList = [ "AK - Alaska", "AL - Alabama", "AR - Arkansas", "AZ - Arizona", "CA - California", "CO - Colorado", "CT - Connecticut", "DC - District of Columbia","DE - Delaware", "FL - Florida", "GA - Georgia", "HI - Hawaii", "IA - Iowa", "ID - Idaho", "IL - Illinois", "IN - Indiana", "KS - Kansas", "KY - Kentucky", "LA - Louisiana", "MA - Massachusetts", "MD - Maryland", "ME - Maine", "MI - Michigan", "MN - Minnesota", "MO - Missouri", "MS - Mississippi", "MT - Montana", "NC - North Carolina", "ND - North Dakota", "NE - Nebraska", "NH - New Hampshire", "NJ - New Jersey", "NM - New Mexico", "NV - Nevada", "NY - New York", "OH - Ohio", "OK - Oklahoma", "OR - Oregon", "PA - Pennsylvania", "PR - Puerto Rico", "RI - Rhode Island", "SC - South Carolina", "SD - South Dakota", "TN - Tennessee", "TX - Texas", "UT - Utah", "VA - Virginia", "VI - Virgin Islands", "VT - Vermont", "WA - Washington", "WI - Wisconsin", "WV - West Virginia", "WY - Wyoming"]
 
 // Locations I will frequently access
@@ -72,7 +73,6 @@ $("#zipForm").on("submit", grabLocationInformation);
 function grabInfoByZip() {
     enteredZipCode = $frequentLocations.zipCodeTextBox;
     zipCode = enteredZipCode.val();
-    console.log(zipCode)
 
 }
 
@@ -300,24 +300,57 @@ function fiveDayForecast(){
     Promise.then(
         (data) => {
             forecastData = data; 
-            for (let element of data.list){
-                console.log(element)
-            }
+            breakDownForecast();
+            
         },
         (error) => {
             console.log(`Alert Error: ${fail}`);
         }
     )
-    
 }
 
+function breakDownForecast() {
+    // let dayOneArray; We have this info on the board already
+    let dayTwoArray = [];
+    let dayThreeArray = [];
+    let dayFourArray = [];
+    let dayFiveArray = [];
+    // parsingTime() converts timestamp to weekday nummber 0 - 6 (Sun - Sat)
+    counter = 32;
+
+
+    //for 
+    for (let element of forecastData.list){
+        if (counter > 24) {
+            dayTwoArray.push(element.main.temp);
+            counter--;
+        } else if (counter > 16) {
+            dayThreeArray.push(element.main.temp);
+            counter--;
+        } else if (counter > 8) {
+            dayFourArray.push(element.main.temp);
+            counter--; 
+        }
+        else if (counter > 0) {
+            dayFiveArray.push(element.main.temp);
+            counter--; 
+        }
+    }
+    console.log(dayTwoArray);
+    // console.log(Math.max(...dayTwoArray));
+    console.log(dayThreeArray)
+    console.log(dayFourArray)
+    console.log(dayFiveArray)
+}
+
+// function for adding in clock and date
 function currentTime() {
-    let date = new Date(); 
+    let date = new Date();
     let hh = date.getHours();
     let mm = date.getMinutes();
     let ss = date.getSeconds();
     let session = "AM";
-  
+
     if(hh == 0){
         hh = 12;
     }
@@ -339,8 +372,10 @@ function currentTime() {
 
 
 // Breaking down returned object into 5 min/max combos
-function parsingWeather(){
+function parsingTime(timeStamp){
     // Taking the UNIX timestamp and converting it to weekday number
-    new Date(data.list[i].dt * 1000).getDay() // https://stackoverflow.com/questions/49608768/convert-unix-timestamp-to-week-day (understanding this code)
+    // let convertDay = new Date(timeStamp * 1000).getDay() 
+    let test = new Date(timeStamp * 1000).toLocaleDateString() // Output >  xx/xx/xxxx
+    return test;
 }
 
