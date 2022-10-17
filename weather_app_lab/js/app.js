@@ -5,6 +5,7 @@
 // http://api.openweathermap.org/geo/1.0/direct?q=Dallas,TX,US&limit=1&appid=3c2c378d932ce2a3619cd17e3119a611  << Test
 
 // Information I will need but comes from external sources
+
 let weatherData;
 let forecastData;
 let locationInformation;
@@ -35,6 +36,7 @@ $frequentLocations = {
     humidityReading: $("#humidity"), // .text()
     windSpeedReading: $("#windSpeed"), // .text()
     timeDisplay: $("#time"), // .text()
+    dateDisplay: $("#date"),
     descriptionDisplay: $("#description"), // .text()
     // Footer display area
     dayOneMax: $("#dayOneMax"),
@@ -331,6 +333,7 @@ function currentTime() {
      let time = hh + ":" + mm + ":" + ss + " " + session;
   
     $frequentLocations.timeDisplay.text(time); 
+    $frequentLocations.dateDisplay.text(date.toLocaleDateString());
     let t = setTimeout(function(){ currentTime() }, 1000);
   }
 
