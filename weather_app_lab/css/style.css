@@ -20,7 +20,7 @@ header {
     text-align: center;
     align-items: center;
     background-image: url("https://www.fultonschools.org/cms/lib/GA50000114/Centricity/Domain/1391/weatherbanner.png");
-    background-size: cover;                      /* <------ */
+    background-size: cover;                     
     background-position: center center;  
     
 }   
@@ -42,7 +42,7 @@ footer {
 
 main {
     display: grid;
-    grid-template: 1fr 1fr / 1fr;
+    grid-template: 1fr 1fr / 1fr 1fr;
     justify-content: center;
     align-content: center;
     text-align: center;
@@ -78,6 +78,9 @@ input[type="submit"] {
     font-size: 3em;
 }
 #feelTemp{
+    font-size: 2.5em;
+}
+#humidity, #windSpeed {
     font-size: 2.5em;
 }
 h5{
