@@ -93,7 +93,7 @@ function grabLocationInformation(event) {
     if(eventId === "cityTextBox") {
 
         Promise = $.ajax({
-            url: `http://api.openweathermap.org/geo/1.0/direct?q=${cityInput},${state},US&limit=1&appid=3c2c378d932ce2a3619cd17e3119a611`
+            url: `https://api.openweathermap.org/geo/1.0/direct?q=${cityInput},${state},US&limit=1&appid=3c2c378d932ce2a3619cd17e3119a611`
         })
 
         Promise.then(
@@ -115,7 +115,7 @@ function grabLocationInformation(event) {
 
     } else {
         Promise = $.ajax({
-            url: `http://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},US&appid=3c2c378d932ce2a3619cd17e3119a611`
+            url: `https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},US&appid=3c2c378d932ce2a3619cd17e3119a611`
         })
 
         Promise.then(
@@ -282,7 +282,7 @@ function zipConversion() {
     return state;
 }
 
-// Icon url: http://openweathermap.org/img/wn/10d@2x.png
+// Icon url: https://openweathermap.org/img/wn/10d@2x.png
 // Update screen with the right stats
 function updateDisplay(){
     $frequentLocations.mainTempReading.text(tempConversion(weatherData.main.temp));
@@ -294,7 +294,7 @@ function updateDisplay(){
     $frequentLocations.descriptionDisplay.text(weatherData.weather[0].description.toUpperCase());
     $frequentLocations.cityLabel.text(weatherData.name);
     $frequentLocations.stateLabel.text(state);
-    $frequentLocations.weatherImage.attr("src",`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`);
+    $frequentLocations.weatherImage.attr("src",`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`);
     
 }
 
